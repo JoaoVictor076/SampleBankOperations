@@ -1,0 +1,19 @@
+dotnet add ./test/SampleBankOperations.Core.Tests package coverlet.collector
+dotnet add ./test/SampleBankOperations.App.Tests package coverlet.collector
+dotnet add ./test/SampleBankOperations.Application.Tests package coverlet.collector
+dotnet add ./test/SampleBankOperations.Infrastructure.Tests package coverlet.collector
+
+
+
+
+
+dotnet test ./test/SampleBankOperations.Core.Tests --collect:"XPlat Code Coverage" --results-directory ./coveragereport/core
+dotnet test ./test/SampleBankOperations.App.Tests --collect:"XPlat Code Coverage" --results-directory ./coveragereport/app
+dotnet test ./test/SampleBankOperations.Application.Tests --collect:"XPlat Code Coverage" --results-directory ./coveragereport/app
+dotnet test ./test/SampleBankOperations.Infrastructure.Tests --collect:"XPlat Code Coverage" --results-directory ./coveragereport/app
+
+
+
+reportgenerator -reports:"coveragereport/**/*.cobertura.xml" -targetdir:"coveragereport/html" -reporttypes:Html
+
+start coveragereport/html/index.html
